@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animation - Optical Poem</title>
+    <style>
+        body {
+            background-color: darkgrey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .circle {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            opacity: 1;
+            animation: moveAndChange 5s infinite alternate ease-in-out;
+        }
+
+        @keyframes moveAndChange {
+            0% {
+                transform: translate(0, 0) scale(1);
+                background-color: red;
+                opacity: 1;
+            }
+            25% {
+                transform: translate(-100px, -100px) scale(1.2);
+                background-color: orange;
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(100px, 100px) scale(0.8);
+                background-color: yellow;
+                opacity: 0.6;
+            }
+            75% {
+                transform: translate(-150px, 150px) scale(1.5);
+                background-color: green;
+                opacity: 0.4;
+            }
+            100% {
+                transform: translate(200px, -200px) scale(1);
+                background-color: blue;
+                opacity: 0.2;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="circle"></div>
+
+</body>
+</html>
