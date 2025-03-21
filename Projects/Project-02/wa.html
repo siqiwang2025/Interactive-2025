@@ -1,0 +1,87 @@
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background-color: black;
+    }
+    .container {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+    }
+    .ball {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        background-color: red;
+        border-radius: 50%;
+    }
+
+    .wall {
+            position: absolute;
+            left: 50%;
+            top: 25%;
+            width: 5px;
+            height: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+    
+    /* 从左到右穿过 */
+    @keyframes moveLeftToRightPass {
+        0% { left: 0; }
+        100% { left: 100vw; }
+    }
+
+    /* 从左到右撞墙反弹 */
+    @keyframes moveLeftToRightBounce {
+        0% { left: 0; }
+        50% { left: 50vw; }
+        100% { left: 0; }
+    }
+
+    /* 从右到左穿过 */
+    @keyframes moveRightToLeftPass {
+        0% { right: 0; }
+        100% { right: 100vw; }
+    }
+
+    /* 从右到左撞墙反弹 */
+    @keyframes moveRightToLeftBounce {
+        0% { right: 0; }
+        50% { right: 50vw; }
+        100% { right: 0; }
+    }
+</style>
+
+<div class="container"></div>
+<div class="wall"></div>
+
+
+<script>
+    const container = document.querySelector(".container");
+
+    for (let i = 0; i < 20; i++) {
+        let ball = document.createElement("div");
+        ball.className = "ball";
+        ball.style.top = `${Math.random() * window.innerHeight}px`;
+
+        let fromLeft = Math.random() < 0.5;
+        let willBounce = Math.random() < 0.5;
+
+        if (fromLeft) {
+            ball.style.left = "0px";
+            ball.style.animation = willBounce 
+                ? "moveLeftToRightBounce 5s infinite linear" 
+                : "moveLeftToRightPass 5s infinite linear";
+        } else {
+            ball.style.right = "0px";
+            ball.style.animation = willBounce 
+                ? "moveRightToLeftBounce 5s infinite linear" 
+                : "moveRightToLeftPass 5s infinite linear";
+        }
+
+        ball.style.animationDelay = `${Math.random() * 2}s`;
+        container.appendChild(ball);
+    }
+</script>

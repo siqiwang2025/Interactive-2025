@@ -1,0 +1,91 @@
+<<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moving</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: black;
+            overflow: hidden;
+            margin: 0;
+        }
+
+        .ball {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        
+        .red { background-color: red; }
+        .light-blue { background-color: #00bfff; }
+        .blue { background-color: blue; }
+        .dark-red { background-color: darkred; }
+
+        @keyframes moveToCenter {
+            from { transform: translate(var(--start-x), var(--start-y)); }
+            to { transform: translate(0, 0); }
+        }
+        
+        @keyframes splitMove {
+            to { transform: translate(var(--end-x), var(--end-y)); opacity: 0; }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="ball red" id="mainBall"></div>
+
+    
+    <script>
+        function startAnimation() {
+            const mainBall = document.getElementById("mainBall");
+            const startX = Math.random() > 0.5 ? '-100vw' : '100vw';
+            const startY = Math.random() > 0.5 ? '-100vh' : '100vh';
+            mainBall.style.setProperty('--start-x', startX);
+            mainBall.style.setProperty('--start-y', startY);
+            mainBall.style.animation = 'moveToCenter 2s ease-out forwards';
+
+            setTimeout(() => {
+                mainBall.style.display = "none";
+                splitBall();
+            }, 2000);
+        }
+
+        function splitBall() {
+            const colors = ["light-blue", "blue", "red", "dark-red"];
+            const directions = [
+                { x: '-200px', y: '-200px' },
+                { x: '200px', y: '-200px' },
+                { x: '-200px', y: '200px' },
+                { x: '200px', y: '200px' }
+            ];
+            
+            colors.forEach((color, index) => {
+                const newBall = document.createElement("div");
+                newBall.classList.add("ball", color);
+                newBall.style.setProperty('--end-x', directions[index].x);
+                newBall.style.setProperty('--end-y', directions[index].y);
+                newBall.style.animation = 'splitMove 1.5s ease-out forwards';
+                newBall.style.left = '50%';
+                newBall.style.top = '50%';
+                document.body.appendChild(newBall);
+                
+                setTimeout(() => { newBall.remove(); }, 1500);
+            });
+            
+            setTimeout(() => {
+                document.getElementById("mainBall").style.display = "block";
+                startAnimation();
+            }, 3000);
+        }
+        
+        startAnimation();
+    </script>
+</body>
+</html>

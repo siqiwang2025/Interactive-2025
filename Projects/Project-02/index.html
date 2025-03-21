@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project2</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin: 50px 0;
+        }
+
+        .button-main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 380px;
+            height: 120px;
+            font-size: 26px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            border-radius: 60px;
+            background: linear-gradient(45deg, #fe2d56, #fb5a79);
+            box-shadow: 0 0 20px rgba(254, 45, 86, 0.6);
+            transition: all 0.4s ease-in-out;
+            cursor: pointer;
+        }
+
+        .button-main:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(255, 90, 155, 1);
+        }
+
+        .button-subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .button-subtitle:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .popular-tags {
+            background: rgba(30, 30, 30, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            margin: 40px auto;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .popular-tags h2 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .popular-tags h2::after {
+            content: "";
+            display: block;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #22f7e9, #12c8b7);
+            margin: 8px auto 0;
+            border-radius: 3px;
+        }
+
+        .tag-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #22f7e9, #12c8b7);
+            color: #000;
+            padding: 10px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(34, 247, 233, 0.3);
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .tag:hover {
+            transform: translateY(-3px) scale(1.1);
+            background: linear-gradient(135deg, #12c8b7, #0aaea1);
+            box-shadow: 0 6px 15px rgba(34, 247, 233, 0.5);
+        }
+
+        .tag {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeInTag 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeInTag {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tag:nth-child(n) {
+            animation-delay: calc(0.1s * var(--i));
+        }
+
+        .content {
+            background-color: #1e1e1e;
+            color: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #00f2ea;
+            text-align: center;
+        }
+
+        .content img {
+            width: 150px;
+            height: auto;
+            margin: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .content img:hover {
+            transform: scale(1.1);
+        }
+
+        @media screen and (max-width: 600px) {
+            .tag-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .tag {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            .popular-tags {
+                padding: 20px;
+            }
+
+        }
+        @media print {
+
+            section{
+                background-color: black;
+                width: 500px;
+                height: 500px;
+            }
+
+            div.container{
+                background-color: black;
+                width: 500px;
+                height: 500px;
+            }
+    body {
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        font-size: 18px; /* 适中字体大小，确保打印清晰 */
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .button-container {
+        display: none; /* 隐藏交互按钮，避免影响排版 */
+    }
+
+    .popular-tags, .content {
+        page-break-inside: avoid; /* 避免标签和内容部分被拆断 */
+    }
+}
+
+@page {
+    size:letter;
+    margin: 1.5cm; /* 设置合适边距 */
+}
+
+
+    </style>
+</head>
+<body>
+
+    <header></header>
+
+    <section class="hero">
+        <h2>Tiktok User moving to...</h2>
+        <p>Interactive Media Project 2</p>
+    </section>
+
+    <div class="container">
+        <div class="button-container">
+            <a href="wall.html" 
+           class="button-main">Building wall</a>
+
+            <a href="https://docs.google.com/presentation/d/18hCsAATI4-5sv79sjYfCFfRhMIiExzCLVTyQTxab2N8/edit?usp=sharing" 
+               class="button-subtitle" 
+               target="_blank">Google Introduction Slide</a>
+        </div>
+    </div>
+
+    <div class="popular-tags">
+        <h2>Platform they choose</h2>
+        <div class="tag-list">
+            <span class="tag" style="--i:1;">YouTube Shorts</span>
+            <span class="tag" style="--i:2;">Meta</span>
+            <span class="tag" style="--i:3;">Bluesky</span>
+            <span class="tag" style="--i:4;">REDnote</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <a href="Bluesky_Logo.png" target="_blank"><img src="Bluesky_Logo.png" alt="Bluesky Logo"></a>
+        <a href="images.png" target="_blank"><img src="images.png" alt="Image"></a>
+        <a href="Meta_Platforms_Inc._logo_(cropped).svg.png" target="_blank"><img src="Meta_Platforms_Inc._logo_(cropped).svg.png" alt="Meta Logo"></a>
+        <a href="Xiaohongshu-1.png" target="_blank"><img src="Xiaohongshu-1.png" alt="Xiaohongshu Logo"></a>
+    </div>
+
+</body>
+</html>
