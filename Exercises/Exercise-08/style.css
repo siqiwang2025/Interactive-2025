@@ -1,0 +1,48 @@
+/* Reset Base Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Press Start 2P', monospace;
+  text-align: center;
+  background: #f0f0f0;
+}
+
+.container {
+  padding: 2rem;
+}
+
+.image, .text {
+  display: none;
+  width: 100%;
+  height: auto;
+}
+
+
+@media screen and (min-width: 1025px) {
+  .image-large,
+  .text-large {
+    display: block;
+  }
+}
+
+/* === 中屏：宽度 601px - 1024px === */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  .image-medium,
+  .text-medium {
+    display: block;
+  }
+}
+
+/* === 小屏：宽度 <= 600px === */
+@media screen and (max-width: 600px) {
+  .image-small,
+  .text-small {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .image-smallsmall {
+    display: block;
+  }
+}
